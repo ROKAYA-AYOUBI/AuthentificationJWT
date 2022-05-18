@@ -6,6 +6,10 @@ import com.example.dashboardbe.Domaine.Role;
 import com.example.dashboardbe.Domaine.User;
 import com.example.dashboardbe.Exception.ResourceNotFoundException;
 
+import javax.management.relation.RoleNotFoundException;
+import java.util.List;
+import java.util.Optional;
+
 
 public interface UserService {
 
@@ -24,10 +28,12 @@ public interface UserService {
 
 
 
-    //-----------update methode
-
-
-
+    //----------- methode
+    //User save(User user);
+    User addRoleToUser(String username, String roleName) throws RoleNotFoundException;
+    Optional<User> findByUsername(String username);
+    List<User> findAll();
+    Role save(Role role);
 
 
 }

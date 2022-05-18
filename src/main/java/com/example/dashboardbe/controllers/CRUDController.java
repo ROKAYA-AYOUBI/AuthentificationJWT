@@ -8,6 +8,7 @@ import com.example.dashboardbe.Repository.RoleRepository;
 import com.example.dashboardbe.Repository.UserRepository;
 import com.example.dashboardbe.Service.UserService;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.relation.RoleNotFoundException;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -115,34 +117,23 @@ public class CRUDController {
     }
 
 
-
-    //------------------------------Is not Work---------------------
-/*
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> UpdateUserRole(@PathVariable(value = "id") Long id,
-                                            @Valid @RequestBody UpdateRequest updateRequest)throws ResourceNotFoundException{
-
-        // update user object
-
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
-
-
-        user.setUsername(updateRequest.getUsername());
-        user.setEmail(updateRequest.getEmail());
-        user.setPassword(encoder.encode(updateRequest.getPassword()));
-
-        Role roles = roleRepository.findByName("ROLE_USER").get();
-        user.setRoles(Collections.singleton(roles));
-
-        userRepository.save(user);
-
-        return new ResponseEntity<>("User update successfully", HttpStatus.OK);
-
+    //--------------------
+    @GetMapping
+    public ResponseEntity<List<User>> findAll() {
+        return ResponseEntity.ok().body(userService.findAll());
     }
 
- */
+    @GetMapping("/{username}")
+    public ResponseEntity<?> findByUsername(@PathVariable String username) {
+        return ResponseEntity.ok().body(userService.findByUsername(username));
+    }
+    @PostMapping("/{username}/addRoleToUser")
+    public ResponseEntity<?> addRoleToUser(@PathVariable String username, @RequestBody RoleDTO request) throws RoleNotFoundException {
+        User userEntity = userService.addRoleToUser(username, request.getRoleName());
+        return ResponseEntity.ok(userEntity);
+    }
 
 
 }
+
 
