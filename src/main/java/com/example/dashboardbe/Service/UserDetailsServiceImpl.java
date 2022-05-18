@@ -68,6 +68,7 @@ public class UserDetailsServiceImpl implements UserDetailsService , UserService{
 
 
 
+
     //-----------------Rest Password-----------------
     public void updateResetPasswordToken(String token, String email) throws ResourceNotFoundException {
         User user = userRepository.findByEmail(email);
@@ -93,14 +94,16 @@ public class UserDetailsServiceImpl implements UserDetailsService , UserService{
     }
 //-------------------------
 
+
+
+
+
  //----------------  add roles  ----------------
     @Override
-    public Role save(Role role) {
+    public Role saveRole(Role role) {
         log.info("Saving role {} to the database", role.getName());
         return roleRepository.save(role);
     }
-
-
 
     //----------------  add roles  TO USER ----------------
     @Override

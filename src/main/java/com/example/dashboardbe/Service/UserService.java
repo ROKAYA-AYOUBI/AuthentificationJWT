@@ -33,7 +33,7 @@ public interface UserService {
     User addRoleToUser(String username, String roleName) throws RoleNotFoundException;
     Optional<User> findByUsername(String username);
     List<User> findAll();
-    Role save(Role role);
+
 
 
 }
