@@ -79,7 +79,9 @@ public class AuthController {
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
 
         return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(),
-                userDetails.getUsername(), userDetails.getEmail(), roles));
+                userDetails.getUsername(), userDetails.getEmail(),userDetails.getPhoto(), userDetails.getNomComplet(),
+                userDetails.getTelephone(), userDetails.getStatut(), userDetails.getCreationDate(),
+                roles));
     }
 
 
@@ -99,7 +101,8 @@ public class AuthController {
 
         // create user object
         User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+                encoder.encode(signUpRequest.getPassword()), signUpRequest.getPhoto() , signUpRequest.getNomComplet(),
+                signUpRequest.getTelephone() , signUpRequest.getStatut(), signUpRequest.getCreationDate());
 
         Role roles = roleRepository.findByName("ROLE_USER").get();
         user.setRoles(Collections.singleton(roles));

@@ -1,6 +1,7 @@
 package com.example.dashboardbe.payload.request;
 
 
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.validation.constraints.*;
@@ -20,6 +21,17 @@ public class SignupRequest {
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
+    private String photo;
+
+    private String nomComplet;
+
+    private String telephone;
+
+    private String statut;
+
+   private LocalDate creationDate;
+
+
 
     public String getUsername() {
         return username;
@@ -33,10 +45,6 @@ public class SignupRequest {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -45,4 +53,23 @@ public class SignupRequest {
         this.password = password;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public String getNomComplet() {
+        return nomComplet;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public String getStatut() {
+        return statut;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
 }

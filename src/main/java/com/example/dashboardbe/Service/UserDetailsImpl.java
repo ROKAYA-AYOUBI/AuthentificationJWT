@@ -1,6 +1,7 @@
 package com.example.dashboardbe.Service;
 
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -26,15 +27,30 @@ public class UserDetailsImpl implements UserDetails {
 
     @JsonIgnore
     private String password;
+    private String photo;
+
+    private String nomComplet;
+
+    private  String  telephone;
+
+    private String statut;
+
+    private LocalDate creationDate;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String username, String email, String password,
+    public UserDetailsImpl(Long id, String username, String email, String password,String photo
+            ,String nomComplet,String telephone,String  statut,LocalDate creationDate,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.photo = photo;
+        this.nomComplet = nomComplet;
+        this.telephone = telephone;
+        this.statut =  statut;
+        this.creationDate =creationDate;
         this.authorities = authorities;
     }
 
@@ -49,12 +65,37 @@ public class UserDetailsImpl implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
+                user.getPhoto(),
+                user.getNomComplet(),
+                user.getTelephone(),
+                user.getStatut(),
+                user.getCreationDate(),
                 authorities);
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public String getNomComplet() {
+        return nomComplet;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public String getStatut() {
+        return statut;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
     }
 
     public Long getId() {

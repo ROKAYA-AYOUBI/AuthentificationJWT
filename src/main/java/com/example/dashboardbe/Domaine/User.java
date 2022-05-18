@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,9 +36,13 @@ public class User  {
     @Size(max = 20)
     private String username;
 
-    // private boolean active;
 
+    private String photo;
+    private String nomComplet;
+    private  String telephone;
+    private String statut ;
 
+    private LocalDate creationDate;
     @NotBlank
     @Size(max = 50)
     @Email
@@ -46,6 +51,10 @@ public class User  {
     @NotBlank
     @Size(max = 120)
     private String password;
+
+
+
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
@@ -56,24 +65,21 @@ public class User  {
     @OneToOne
     private RefreshToken token;
 
-    public User(String username, String email, String password) {
 
 
+
+
+
+    public User(String username, String email, String password, String photo,String nomComplet, String telephone ,String statut ,LocalDate creationDate ) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.photo = photo;
+        this.nomComplet = nomComplet;
+        this.telephone = telephone;
+        this.statut = statut;
+        this.creationDate = creationDate;
 
     }
-
-
-
-    public User(String username, String email, String password, Set<Role> roles) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-    }
-
-
 }
 

@@ -1,6 +1,7 @@
 package com.example.dashboardbe.payload.response;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class JwtResponse {
@@ -10,15 +11,74 @@ public class JwtResponse {
     private Long id;
     private String username;
     private String email;
-    private List<String> roles;
+    private String photo;
 
-    public JwtResponse(String accessToken, String refreshToken, Long id, String username, String email, List<String> roles) {
+    private String   nomComplet;
+
+    private String telephone;
+
+    private String  statut;
+
+    private LocalDate creationDate;
+
+    private List<String> role;
+
+
+    public JwtResponse(String accessToken, String refreshToken, Long id, String username, String email,
+                       String photo,String nomComplet,String telephone,String statut,LocalDate creationDate,
+                       List<String> role) {
         this.token = accessToken;
         this.refreshToken = refreshToken;
         this.id = id;
         this.username = username;
         this.email = email;
-        this.roles = roles;
+        this.photo=photo;
+        this.nomComplet = nomComplet;
+        this.telephone = telephone;
+        this.statut = statut;
+        this.creationDate =  creationDate ;
+        this.role = role;
+
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getNomComplet() {
+        return nomComplet;
+    }
+
+    public void setNomComplet(String nomComplet) {
+        this.nomComplet = nomComplet;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
     }
 
     public String getAccessToken() {
@@ -61,8 +121,8 @@ public class JwtResponse {
         this.username = username;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public List<String> getRole() {
+        return role;
     }
 
     public String getRefreshToken() {
