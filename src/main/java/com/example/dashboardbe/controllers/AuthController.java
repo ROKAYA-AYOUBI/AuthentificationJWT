@@ -15,7 +15,7 @@ import com.example.dashboardbe.Repository.RoleRepository;
 import com.example.dashboardbe.Repository.UserRepository;
 import com.example.dashboardbe.Security.jwt.JwtUtils;
 import com.example.dashboardbe.Service.RefreshTokenService;
-import com.example.dashboardbe.Service.UserDetailsImpl;
+import com.example.dashboardbe.Service.Impl.UserDetailsImpl;
 import com.example.dashboardbe.payload.request.LogOutRequest;
 import com.example.dashboardbe.payload.request.LoginRequest;
 import com.example.dashboardbe.payload.request.SignupRequest;
@@ -34,7 +34,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 

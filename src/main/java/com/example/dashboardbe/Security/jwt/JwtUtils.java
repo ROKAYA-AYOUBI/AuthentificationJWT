@@ -4,7 +4,7 @@ package com.example.dashboardbe.Security.jwt;
 import java.util.Date;
 
 
-import com.example.dashboardbe.Service.UserDetailsImpl;
+import com.example.dashboardbe.Service.Impl.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

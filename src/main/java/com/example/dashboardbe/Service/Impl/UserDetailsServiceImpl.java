@@ -1,4 +1,4 @@
-package com.example.dashboardbe.Service;
+package com.example.dashboardbe.Service.Impl;
 
 
 
@@ -7,6 +7,7 @@ import com.example.dashboardbe.Domaine.User;
 import com.example.dashboardbe.Exception.ResourceNotFoundException;
 import com.example.dashboardbe.Repository.RoleRepository;
 import com.example.dashboardbe.Repository.UserRepository;
+import com.example.dashboardbe.Service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,7 +26,7 @@ import java.util.Optional;
 @Service
 @Transactional
 @Slf4j
-public class UserDetailsServiceImpl implements UserDetailsService , UserService{
+public class UserDetailsServiceImpl implements UserDetailsService , UserService {
 
     UserRepository userRepository;
     RoleRepository roleRepository;

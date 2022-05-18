@@ -65,6 +65,8 @@ public class User  {
     @OneToOne
     private RefreshToken token;
 
+    @OneToMany( targetEntity=Product.class, mappedBy="user" )
+    private Set<Product> commands = new HashSet<>();
 
 
 

@@ -2,7 +2,7 @@ package com.example.dashboardbe.Security;
 
 import com.example.dashboardbe.Security.jwt.AuthEntryPointJwt;
 import com.example.dashboardbe.Security.jwt.AuthTokenFilter;
-import com.example.dashboardbe.Service.UserDetailsServiceImpl;
+import com.example.dashboardbe.Service.Impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
