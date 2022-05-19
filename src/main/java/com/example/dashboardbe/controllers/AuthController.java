@@ -85,11 +85,7 @@ public class AuthController {
                 userDetails.getTelephoneSecondaire(),
                 userDetails.getAdresse(),
                 userDetails.getCreePar(), userDetails.getProfilUtilisateur(), userDetails.getStatutDuCompte(),
-                userDetails.getStatutDuMDP(), userDetails.getDesactivePar(), userDetails.getDateNaissance(),
-                userDetails.getDateCreation(), userDetails.getDateDerniereModification(),
-                userDetails.getDateDernièreModificationDuStatutDuCompte(),
-                userDetails.getDateDernierChangementMDP(),
-                userDetails.getTokenDeReinitialisationDuMDP(),
+                userDetails.getStatutDuMDP(), userDetails.getDesactivePar(),
                 roles));
     }
 
@@ -116,10 +112,7 @@ public class AuthController {
                 signUpRequest.getAdresse(),signUpRequest.getCreePar(),signUpRequest.getProfilUtilisateur(),
 
                 signUpRequest.getStatutDuCompte(), signUpRequest.getStatutDuMDP(), signUpRequest.getDesactivePar(),
-                signUpRequest.getDateNaissance(), signUpRequest.getDateCreation(),
-                signUpRequest.getDateDerniereModification(),  signUpRequest.getDateDernièreModificationDuStatutDuCompte(),
-                signUpRequest.getDateDernierChangementMDP(),
-                signUpRequest.getTokenDeReinitialisationDuMDP(),
+
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword())
         );

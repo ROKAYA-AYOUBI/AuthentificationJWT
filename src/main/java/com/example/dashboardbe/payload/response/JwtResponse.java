@@ -3,6 +3,7 @@ package com.example.dashboardbe.payload.response;
 
 import lombok.Data;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,7 @@ public class JwtResponse {
     private String email;
     private String photo;
 
-    private String   nom;
+    private String  nom;
     private String prenom;
 
     private  String telephonePrincipale ;
@@ -29,16 +30,18 @@ public class JwtResponse {
     private String statutDuCompte  ;
     private String statutDuMDP;
     private String desactivePar;
+/*
+    private Instant dateNaissance;
+    private Instant dateCreation;
+    private Instant dateDerniereModification;
+    private Instant dateDernièreModificationDuStatutDuCompte;
+    private Instant dateDernierChangementMDP;
+    private Instant tokenDeReinitialisationDuMDP;
 
-    private Date dateNaissance;
-    private Date dateCreation;
-    private Date dateDerniereModification;
-    private Date dateDernièreModificationDuStatutDuCompte;
-    private Date dateDernierChangementMDP;
-    private Date tokenDeReinitialisationDuMDP;
 
 
 
+ */
 
 
     private List<String> role;
@@ -49,9 +52,7 @@ public class JwtResponse {
                 String username, String email, String photo,
                 String nom, String prenom, String telephonePrincipale, String telephoneSecondaire,
                 String adresse, String creePar, String profilUtilisateur, String statutDuCompte,
-                String statutDuMDP, String desactivePar, Date dateNaissance, Date dateCreation,
-                 Date dateDerniereModification, Date dateDernièreModificationDuStatutDuCompte,
-                Date dateDernierChangementMDP, Date tokenDeReinitialisationDuMDP,
+                String statutDuMDP, String desactivePar,
                   List<String> role) {
 
             this.token = accessToken;
@@ -70,12 +71,7 @@ public class JwtResponse {
         this.statutDuCompte = statutDuCompte;
         this.statutDuMDP = statutDuMDP;
         this.desactivePar = desactivePar;
-        this.dateNaissance = dateNaissance;
-        this.dateCreation = dateCreation;
-        this.dateDerniereModification = dateDerniereModification;
-        this.dateDernièreModificationDuStatutDuCompte = dateDernièreModificationDuStatutDuCompte;
-        this.dateDernierChangementMDP = dateDernierChangementMDP;
-        this.tokenDeReinitialisationDuMDP = tokenDeReinitialisationDuMDP;
+
 
 
             this.role = role;
@@ -152,27 +148,4 @@ public class JwtResponse {
         return desactivePar;
     }
 
-    public Date getDateNaissance() {
-        return dateNaissance;
-    }
-
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    public Date getDateDerniereModification() {
-        return dateDerniereModification;
-    }
-
-    public Date getDateDernièreModificationDuStatutDuCompte() {
-        return dateDernièreModificationDuStatutDuCompte;
-    }
-
-    public Date getDateDernierChangementMDP() {
-        return dateDernierChangementMDP;
-    }
-
-    public Date getTokenDeReinitialisationDuMDP() {
-        return tokenDeReinitialisationDuMDP;
-    }
 }

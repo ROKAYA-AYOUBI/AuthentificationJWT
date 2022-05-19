@@ -3,6 +3,7 @@ package com.example.dashboardbe.payload.request;
 
 import lombok.Data;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
@@ -38,16 +39,18 @@ public class SignupRequest {
     private String statutDuCompte  ;
     private String statutDuMDP;
     private String desactivePar;
+/*
+    private Instant dateNaissance;
+    private Instant dateCreation;
+    private Instant dateDerniereModification;
+    private Instant dateDernièreModificationDuStatutDuCompte;
+    private Instant dateDernierChangementMDP;
+    private Instant tokenDeReinitialisationDuMDP;
 
-    private Date dateNaissance;
-    private Date dateCreation;
-    private Date dateDerniereModification;
-    private Date dateDernièreModificationDuStatutDuCompte;
-    private Date dateDernierChangementMDP;
-    private Date tokenDeReinitialisationDuMDP;
 
 
 
+ */
 
     public String getUsername() {
         return username;
@@ -105,27 +108,4 @@ public class SignupRequest {
         return desactivePar;
     }
 
-    public Date getDateNaissance() {
-        return dateNaissance;
-    }
-
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    public Date getDateDerniereModification() {
-        return dateDerniereModification;
-    }
-
-    public Date getDateDernièreModificationDuStatutDuCompte() {
-        return dateDernièreModificationDuStatutDuCompte;
-    }
-
-    public Date getDateDernierChangementMDP() {
-        return dateDernierChangementMDP;
-    }
-
-    public Date getTokenDeReinitialisationDuMDP() {
-        return tokenDeReinitialisationDuMDP;
-    }
 }

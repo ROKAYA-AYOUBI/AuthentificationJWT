@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
@@ -54,14 +55,23 @@ public class USER_DETAILS {
     private String statutDuMDP;
     private String desactivePar;
 
-    private Date dateNaissance;
-    private Date dateCreation;
-    private Date dateDerniereModification;
-    private Date dateDernièreModificationDuStatutDuCompte;
-    private Date dateDernierChangementMDP;
-    private Date tokenDeReinitialisationDuMDP;
+    /*
+    @Column(nullable = false)
+    private Instant dateNaissance;
+    @Column(nullable = false)
+    private Instant dateCreation;
+    @Column(nullable = false)
+    private Instant dateDerniereModification;
+    @Column(nullable = false)
+    private Instant dateDernièreModificationDuStatutDuCompte;
+    @Column(nullable = false)
+    private Instant dateDernierChangementMDP;
+    @Column(nullable = false)
+    private Instant tokenDeReinitialisationDuMDP;
 
 
+
+     */
 
 
 
@@ -87,15 +97,17 @@ public class USER_DETAILS {
     @OneToOne
     private RefreshToken token;
 
+
+
     @OneToMany( targetEntity=Product.class, mappedBy="user" )
     private Set<Product> produit = new HashSet<>();
-
+/*
 
     public USER_DETAILS(String username, String photo, String nom, String prenom, String telephonePrincipale,
                         String telephoneSecondaire, String adresse, String creePar, String profilUtilisateur,
-                        String statutDuCompte, String statutDuMDP, String desactivePar, Date dateNaissance,
-                        Date dateCreation, Date dateDerniereModification, Date dateDernièreModificationDuStatutDuCompte,
-                        Date dateDernierChangementMDP, Date tokenDeReinitialisationDuMDP, String email, String password) {
+                        String statutDuCompte, String statutDuMDP, String desactivePar, Instant dateNaissance,
+                        Instant dateCreation, Instant dateDerniereModification, Instant dateDernièreModificationDuStatutDuCompte,
+                        Instant dateDernierChangementMDP, Instant tokenDeReinitialisationDuMDP, String email, String password) {
         this.username = username;
         this.photo = photo;
         this.nom = nom;
@@ -120,6 +132,25 @@ public class USER_DETAILS {
 
 
 
+ */
+public USER_DETAILS(String username, String photo, String nom, String prenom, String telephonePrincipale,
+                    String telephoneSecondaire, String adresse, String creePar, String profilUtilisateur,
+                    String statutDuCompte, String statutDuMDP, String desactivePar, String email, String password) {
+    this.username = username;
+    this.photo = photo;
+    this.nom = nom;
+    this.prenom = prenom;
+    this.telephonePrincipale = telephonePrincipale;
+    this.telephoneSecondaire = telephoneSecondaire;
+    this.adresse = adresse;
+    this.creePar = creePar;
+    this.profilUtilisateur = profilUtilisateur;
+    this.statutDuCompte = statutDuCompte;
+    this.statutDuMDP = statutDuMDP;
+    this.desactivePar = desactivePar;
+    this.email = email;
+    this.password = password;
+}
 
 }
 

@@ -1,6 +1,7 @@
 package com.example.dashboardbe.Service.Impl;
 
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
@@ -43,16 +44,18 @@ public class UserDetailsImpl implements UserDetails {
     private String statutDuCompte  ;
     private String statutDuMDP;
     private String desactivePar;
+/*
+    private Instant dateNaissance;
+    private Instant dateCreation;
+    private Instant dateDerniereModification;
+    private Instant dateDernièreModificationDuStatutDuCompte;
+    private Instant dateDernierChangementMDP;
+    private Instant tokenDeReinitialisationDuMDP;
 
-    private Date dateNaissance;
-    private Date dateCreation;
-    private Date dateDerniereModification;
-    private Date dateDernièreModificationDuStatutDuCompte;
-    private Date dateDernierChangementMDP;
-    private Date tokenDeReinitialisationDuMDP;
 
 
 
+ */
 
 
     private Collection<? extends GrantedAuthority> authorities;
@@ -60,9 +63,7 @@ public class UserDetailsImpl implements UserDetails {
     public UserDetailsImpl(Long id, String username, String email, String password, String photo,
                            String nom, String prenom, String telephonePrincipale, String telephoneSecondaire,
                            String adresse, String creePar, String profilUtilisateur, String statutDuCompte, String statutDuMDP,
-                           String desactivePar, Date dateNaissance, Date dateCreation, Date dateDerniereModification,
-                           Date dateDernièreModificationDuStatutDuCompte, Date dateDernierChangementMDP,
-                           Date tokenDeReinitialisationDuMDP, Collection<? extends GrantedAuthority> authorities) {
+                           String desactivePar,  Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -78,12 +79,7 @@ public class UserDetailsImpl implements UserDetails {
         this.statutDuCompte = statutDuCompte;
         this.statutDuMDP = statutDuMDP;
         this.desactivePar = desactivePar;
-        this.dateNaissance = dateNaissance;
-        this.dateCreation = dateCreation;
-        this.dateDerniereModification = dateDerniereModification;
-        this.dateDernièreModificationDuStatutDuCompte = dateDernièreModificationDuStatutDuCompte;
-        this.dateDernierChangementMDP = dateDernierChangementMDP;
-        this.tokenDeReinitialisationDuMDP = tokenDeReinitialisationDuMDP;
+
         this.authorities = authorities;
     }
 
@@ -131,12 +127,7 @@ public class UserDetailsImpl implements UserDetails {
                 user.getStatutDuCompte(),
                 user.getStatutDuMDP(),
                 user.getDesactivePar(),
-                user.getDateNaissance(),
-                user.getDateCreation(),
-                user.getDateDerniereModification(),
-                user.getDateDernièreModificationDuStatutDuCompte(),
-                user.getDateDernierChangementMDP(),
-                user.getTokenDeReinitialisationDuMDP(),
+
                 authorities);
     }
 
@@ -217,29 +208,6 @@ public class UserDetailsImpl implements UserDetails {
         return desactivePar;
     }
 
-    public Date getDateNaissance() {
-        return dateNaissance;
-    }
-
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    public Date getDateDerniereModification() {
-        return dateDerniereModification;
-    }
-
-    public Date getDateDernièreModificationDuStatutDuCompte() {
-        return dateDernièreModificationDuStatutDuCompte;
-    }
-
-    public Date getDateDernierChangementMDP() {
-        return dateDernierChangementMDP;
-    }
-
-    public Date getTokenDeReinitialisationDuMDP() {
-        return tokenDeReinitialisationDuMDP;
-    }
 
     @Override
     public boolean isAccountNonExpired() {
