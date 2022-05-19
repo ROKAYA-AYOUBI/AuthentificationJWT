@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import com.example.dashboardbe.Domaine.RefreshToken;
-import com.example.dashboardbe.Domaine.Role;
-import com.example.dashboardbe.Domaine.User;
+import com.example.dashboardbe.Domaine.USER_ROLES;
+import com.example.dashboardbe.Domaine.USER_DETAILS;
 import com.example.dashboardbe.Exception.TokenRefreshException;
 import com.example.dashboardbe.Repository.RoleRepository;
 import com.example.dashboardbe.Repository.UserRepository;
@@ -23,6 +23,7 @@ import com.example.dashboardbe.payload.request.TokenRefreshRequest;
 import com.example.dashboardbe.payload.response.JwtResponse;
 import com.example.dashboardbe.payload.response.MessageResponse;
 import com.example.dashboardbe.payload.response.TokenRefreshResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@Slf4j
 //@RequestMapping("/api/auth")
 public class AuthController {
     @Autowired
@@ -78,10 +80,20 @@ public class AuthController {
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
 
         return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(),
-                userDetails.getUsername(), userDetails.getEmail(),userDetails.getPhoto(), userDetails.getNomComplet(),
-                userDetails.getTelephone(), userDetails.getStatut(), userDetails.getCreationDate(),
+                userDetails.getUsername(), userDetails.getEmail(),userDetails.getPhoto(), userDetails.getNom(),
+                userDetails.getPrenom(),userDetails.getTelephonePrincipale(),
+                userDetails.getTelephoneSecondaire(),
+                userDetails.getAdresse(),
+                userDetails.getCreePar(), userDetails.getProfilUtilisateur(), userDetails.getStatutDuCompte(),
+                userDetails.getStatutDuMDP(), userDetails.getDesactivePar(), userDetails.getDateNaissance(),
+                userDetails.getDateCreation(), userDetails.getDateDerniereModification(),
+                userDetails.getDateDernièreModificationDuStatutDuCompte(),
+                userDetails.getDateDernierChangementMDP(),
+                userDetails.getTokenDeReinitialisationDuMDP(),
                 roles));
     }
+
+
 
 
 
@@ -99,11 +111,22 @@ public class AuthController {
         }
 
         // create user object
-        User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()), signUpRequest.getPhoto() , signUpRequest.getNomComplet(),
-                signUpRequest.getTelephone() , signUpRequest.getStatut(), signUpRequest.getCreationDate());
+        USER_DETAILS user = new USER_DETAILS(signUpRequest.getUsername(),signUpRequest.getPhoto(),  signUpRequest.getNom(),
+                signUpRequest.getPrenom(),signUpRequest.getTelephonePrincipale(), signUpRequest.getTelephoneSecondaire() ,
+                signUpRequest.getAdresse(),signUpRequest.getCreePar(),signUpRequest.getProfilUtilisateur(),
 
-        Role roles = roleRepository.findByName("ROLE_USER").get();
+                signUpRequest.getStatutDuCompte(), signUpRequest.getStatutDuMDP(), signUpRequest.getDesactivePar(),
+                signUpRequest.getDateNaissance(), signUpRequest.getDateCreation(),
+                signUpRequest.getDateDerniereModification(),  signUpRequest.getDateDernièreModificationDuStatutDuCompte(),
+                signUpRequest.getDateDernierChangementMDP(),
+                signUpRequest.getTokenDeReinitialisationDuMDP(),
+                signUpRequest.getEmail(),
+                encoder.encode(signUpRequest.getPassword())
+        );
+
+
+
+        USER_ROLES roles = roleRepository.findByName("ROLE_USER").get();
         user.setRoles(Collections.singleton(roles));
 
         userRepository.save(user);

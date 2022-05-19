@@ -1,7 +1,7 @@
 package com.example.dashboardbe.controllers;
 
 
-import com.example.dashboardbe.Domaine.User;
+import com.example.dashboardbe.Domaine.USER_DETAILS;
 import com.example.dashboardbe.Exception.ResourceNotFoundException;
 import com.example.dashboardbe.Password.Utility;
 import com.example.dashboardbe.Service.UserService;
@@ -150,7 +150,7 @@ public class PasswordController {
 
     @GetMapping("/reset_password")
     public String showResetPasswordForm(@Param(value = "token") String token, Model model) {
-        User user = userService.getByResetPasswordToken(token);
+        USER_DETAILS user = userService.getByResetPasswordToken(token);
         model.addAttribute("token", token);
 
         if (user == null) {
@@ -166,7 +166,7 @@ public class PasswordController {
         String token = request.getParameter("token");
         String password = request.getParameter("password");
 
-        User user = userService.getByResetPasswordToken(token);
+        USER_DETAILS user = userService.getByResetPasswordToken(token);
         model.addAttribute("title", "Reset your password");
 
         if (user == null) {

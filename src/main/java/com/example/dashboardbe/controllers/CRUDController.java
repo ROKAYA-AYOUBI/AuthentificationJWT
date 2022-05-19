@@ -1,19 +1,17 @@
 package com.example.dashboardbe.controllers;
 
 
-import com.example.dashboardbe.Domaine.Role;
-import com.example.dashboardbe.Domaine.User;
+import com.example.dashboardbe.Domaine.USER_ROLES;
+import com.example.dashboardbe.Domaine.USER_DETAILS;
 import com.example.dashboardbe.Exception.ResourceNotFoundException;
 import com.example.dashboardbe.Repository.RoleRepository;
 import com.example.dashboardbe.Repository.UserRepository;
 import com.example.dashboardbe.Service.UserService;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -41,24 +39,38 @@ public class CRUDController {
     PasswordEncoder encoder;
     //-------------------------------------CRUD----------------------------------//
 
+    //--------------------
+    @GetMapping
+    public ResponseEntity<List<USER_DETAILS>> findAll() {
+        return ResponseEntity.ok().body(userService.findAll());
+    }
 
+    @GetMapping("/{username}")
+    public ResponseEntity<?> findByUsername(@PathVariable String username) {
+        return ResponseEntity.ok().body(userService.findByUsername(username));
+    }
+    @PostMapping("/{username}/addRoleToUser")
+    public ResponseEntity<?> addRoleToUser(@PathVariable String username, @RequestBody RoleDTO request) throws RoleNotFoundException {
+        USER_DETAILS userEntity = userService.addRoleToUser(username, request.getRoleName());
+        return ResponseEntity.ok(userEntity);
+    }
     //--------------affiche tout les users------
     @GetMapping("/users")
-    public List<User> getAllUsers() {
+    public List<USER_DETAILS> getAllUsers() {
         return userRepository.findAll();
     }
 
     //------------ affiche user par id----------
 
     @GetMapping("/users/{id}")
-    public User getUserInfo(@PathVariable("id") Long userId) {
-        Optional<User> optional = userRepository.findById(userId);
-        return optional.orElseGet(User::new);
+    public USER_DETAILS getUserInfo(@PathVariable("id") Long userId) {
+        Optional<USER_DETAILS> optional = userRepository.findById(userId);
+        return optional.orElseGet(USER_DETAILS::new);
     }
     //--------------affiche tout les users------
     @GetMapping("/users/list")
-    public Page<User> pageQuery(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+    public Page<USER_DETAILS> pageQuery(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                        @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         return userRepository.findAll(PageRequest.of(pageNum - 1, pageSize));
     }
 
@@ -66,7 +78,7 @@ public class CRUDController {
     //---------Ajouter une role--------------
 
     @PostMapping("/addRole")
-    public Role saveRole(@RequestBody Role name){
+    public USER_ROLES saveRole(@RequestBody USER_ROLES name){
         return userService.saveRole(name);
     }
 
@@ -87,7 +99,7 @@ public class CRUDController {
 
     //------ Probleme update user whitout  role
     @PutMapping("/{id}")
-    public User updateUsertw(@PathVariable("id") Long id, @RequestBody User user) {
+    public USER_DETAILS updateUsertw(@PathVariable("id") Long id, @RequestBody USER_DETAILS user) {
         user.setId(id);
         return userRepository.saveAndFlush(user);
 
@@ -99,9 +111,9 @@ public class CRUDController {
     //------- work- without Roles change---------//
 
     @PutMapping("/updatenew/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long id,
-                                           @Valid @RequestBody User userDetails ) throws ResourceNotFoundException {
-        User user = userRepository.findById(id)
+    public ResponseEntity<USER_DETAILS> updateUser(@PathVariable(value = "id") Long id,
+                                                   @Valid @RequestBody USER_DETAILS userDetails ) throws ResourceNotFoundException {
+        USER_DETAILS user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
 
         log.info("role ; {}",user.getRoles());
@@ -112,27 +124,13 @@ public class CRUDController {
 
         log.info("role ; {}",userDetails.getRoles());
         user.setRoles(userDetails.getRoles());
-        final User updatedUser = userRepository.save(user);
+        final USER_DETAILS updatedUser = userRepository.save(user);
         return ResponseEntity.ok(updatedUser);
     }
 
 
 
-    //--------------------
-    @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        return ResponseEntity.ok().body(userService.findAll());
-    }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<?> findByUsername(@PathVariable String username) {
-        return ResponseEntity.ok().body(userService.findByUsername(username));
-    }
-    @PostMapping("/{username}/addRoleToUser")
-    public ResponseEntity<?> addRoleToUser(@PathVariable String username, @RequestBody RoleDTO request) throws RoleNotFoundException {
-        User userEntity = userService.addRoleToUser(username, request.getRoleName());
-        return ResponseEntity.ok(userEntity);
-    }
 
 
 }

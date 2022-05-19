@@ -2,8 +2,8 @@ package com.example.dashboardbe.Service.Impl;
 
 
 
-import com.example.dashboardbe.Domaine.Role;
-import com.example.dashboardbe.Domaine.User;
+import com.example.dashboardbe.Domaine.USER_ROLES;
+import com.example.dashboardbe.Domaine.USER_DETAILS;
 import com.example.dashboardbe.Exception.ResourceNotFoundException;
 import com.example.dashboardbe.Repository.RoleRepository;
 import com.example.dashboardbe.Repository.UserRepository;
@@ -39,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService , UserService 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
+        USER_DETAILS user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
         return UserDetailsImpl.build(user);
@@ -53,9 +53,9 @@ public class UserDetailsServiceImpl implements UserDetailsService , UserService 
 
     //----------------  update  ----------------
     @Override
-    public User updateUser(Long id, User user) {
+    public USER_DETAILS updateUser(Long id, USER_DETAILS user) {
 
-        Optional<User> retrievedUser=userRepository.findById(id);
+        Optional<USER_DETAILS> retrievedUser=userRepository.findById(id);
         if(retrievedUser==null)
             try {
                 throw new Exception("User not found");
@@ -72,7 +72,7 @@ public class UserDetailsServiceImpl implements UserDetailsService , UserService 
 
     //-----------------Rest Password-----------------
     public void updateResetPasswordToken(String token, String email) throws ResourceNotFoundException {
-        User user = userRepository.findByEmail(email);
+        USER_DETAILS user = userRepository.findByEmail(email);
         if (user != null) {
             user.setPassword(token);
             userRepository.save(user);
@@ -81,11 +81,11 @@ public class UserDetailsServiceImpl implements UserDetailsService , UserService 
         }
     }
 
-    public User getByResetPasswordToken(String token) {
+    public USER_DETAILS getByResetPasswordToken(String token) {
         return userRepository.findByPassword(token);
     }
 
-    public void updatePassword(User user, String newPassword) {
+    public void updatePassword(USER_DETAILS user, String newPassword) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(newPassword);
         user.setPassword(encodedPassword);
@@ -101,19 +101,19 @@ public class UserDetailsServiceImpl implements UserDetailsService , UserService 
 
  //----------------  add roles  ----------------
     @Override
-    public Role saveRole(Role role) {
+    public USER_ROLES saveRole(USER_ROLES role) {
         log.info("Saving role {} to the database", role.getName());
         return roleRepository.save(role);
     }
 
     //----------------  add roles  TO USER ----------------
     @Override
-    public User addRoleToUser(String username, String roleName) throws RoleNotFoundException {
+    public USER_DETAILS addRoleToUser(String username, String roleName) throws RoleNotFoundException {
         log.info("Adding role {} to user {}", roleName, username);
-        User user = userRepository.findByUsername(username)
+        USER_DETAILS user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
-        Role role = roleRepository.findByName(roleName)
+        USER_ROLES role = roleRepository.findByName(roleName)
                 .orElseThrow(() -> new RoleNotFoundException("User Not Found with role: " + roleName));
 
        user.getRoles().add(role);
@@ -122,14 +122,14 @@ public class UserDetailsServiceImpl implements UserDetailsService , UserService 
 
     @Transactional(readOnly = true)
     @Override
-    public List<User> findAll() {
+    public List<USER_DETAILS> findAll() {
         log.info("Retrieving all users");
         return userRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<User> findByUsername(String username) {
+    public Optional<USER_DETAILS> findByUsername(String username) {
         log.info("Retrieving user {}", username);
         return userRepository.findByUsername(username);
     }
