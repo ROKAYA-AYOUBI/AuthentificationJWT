@@ -2,7 +2,7 @@ package com.example.dashboardbe.Service.Impl;
 
 
 
-import com.example.dashboardbe.Domaine.USER_ROLES;
+import com.example.dashboardbe.Domaine.ROLES;
 import com.example.dashboardbe.Domaine.USER_DETAILS;
 import com.example.dashboardbe.Exception.ResourceNotFoundException;
 import com.example.dashboardbe.Repository.RoleRepository;
@@ -101,7 +101,7 @@ public class UserDetailsServiceImpl implements UserDetailsService , UserService 
 
  //----------------  add roles  ----------------
     @Override
-    public USER_ROLES saveRole(USER_ROLES role) {
+    public ROLES saveRole(ROLES role) {
         log.info("Saving role {} to the database", role.getName());
         return roleRepository.save(role);
     }
@@ -113,7 +113,7 @@ public class UserDetailsServiceImpl implements UserDetailsService , UserService 
         USER_DETAILS user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
-        USER_ROLES role = roleRepository.findByName(roleName)
+        ROLES role = roleRepository.findByName(roleName)
                 .orElseThrow(() -> new RoleNotFoundException("User Not Found with role: " + roleName));
 
        user.getRoles().add(role);

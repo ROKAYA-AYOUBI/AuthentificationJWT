@@ -2,7 +2,7 @@ package com.example.dashboardbe.Service;
 
 
 
-import com.example.dashboardbe.Domaine.USER_ROLES;
+import com.example.dashboardbe.Domaine.ROLES;
 import com.example.dashboardbe.Domaine.USER_DETAILS;
 import com.example.dashboardbe.Exception.ResourceNotFoundException;
 
@@ -17,7 +17,7 @@ public interface UserService {
     public USER_DETAILS updateUser(Long id, USER_DETAILS user);
 
     //----add Role -----
-    public USER_ROLES saveRole(USER_ROLES role);
+    public ROLES saveRole(ROLES role);
 
     //----Rest password
     public void updateResetPasswordToken(String token, String email) throws ResourceNotFoundException;

@@ -39,6 +39,8 @@ public class SignupRequest {
     private String statutDuCompte  ;
     private String statutDuMDP;
     private String desactivePar;
+
+    private LocalDate  dateNaissance;
 /*
     private Instant dateNaissance;
     private Instant dateCreation;
@@ -108,4 +110,7 @@ public class SignupRequest {
         return desactivePar;
     }
 
+    public LocalDate  getDateNaissance() {
+        return dateNaissance;
+    }
 }

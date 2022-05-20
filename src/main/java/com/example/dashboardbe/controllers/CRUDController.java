@@ -1,7 +1,7 @@
 package com.example.dashboardbe.controllers;
 
 
-import com.example.dashboardbe.Domaine.USER_ROLES;
+import com.example.dashboardbe.Domaine.ROLES;
 import com.example.dashboardbe.Domaine.USER_DETAILS;
 import com.example.dashboardbe.Exception.ResourceNotFoundException;
 import com.example.dashboardbe.Repository.RoleRepository;
@@ -78,7 +78,7 @@ public class CRUDController {
     //---------Ajouter une role--------------
 
     @PostMapping("/addRole")
-    public USER_ROLES saveRole(@RequestBody USER_ROLES name){
+    public ROLES saveRole(@RequestBody ROLES name){
         return userService.saveRole(name);
     }
 

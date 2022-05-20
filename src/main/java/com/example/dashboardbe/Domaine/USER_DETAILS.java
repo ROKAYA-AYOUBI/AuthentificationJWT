@@ -1,14 +1,13 @@
 package com.example.dashboardbe.Domaine;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,9 +54,12 @@ public class USER_DETAILS {
     private String statutDuMDP;
     private String desactivePar;
 
+   @JsonFormat(pattern="yyyy-MM-dd")
+    //@JsonFormat(pattern="dd/MM/yyyy")
+    private LocalDate dateNaissance;
+
     /*
-    @Column(nullable = false)
-    private Instant dateNaissance;
+
     @Column(nullable = false)
     private Instant dateCreation;
     @Column(nullable = false)
@@ -84,15 +86,14 @@ public class USER_DETAILS {
     private String email;
 
     @NotBlank
-    @Size(max = 120)
+    @Size(min=6, max = 100)
     private String password;
-
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<USER_ROLES> roles= new HashSet<>();
+    private Set<ROLES> roles= new HashSet<>();
 
     @OneToOne
     private RefreshToken token;
@@ -135,7 +136,8 @@ public class USER_DETAILS {
  */
 public USER_DETAILS(String username, String photo, String nom, String prenom, String telephonePrincipale,
                     String telephoneSecondaire, String adresse, String creePar, String profilUtilisateur,
-                    String statutDuCompte, String statutDuMDP, String desactivePar, String email, String password) {
+                    String statutDuCompte, String statutDuMDP, String desactivePar, String email, String password
+                    ,LocalDate dateNaissance) {
     this.username = username;
     this.photo = photo;
     this.nom = nom;
@@ -150,6 +152,7 @@ public USER_DETAILS(String username, String photo, String nom, String prenom, St
     this.desactivePar = desactivePar;
     this.email = email;
     this.password = password;
+    this.dateNaissance = dateNaissance;
 }
 
 }

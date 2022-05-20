@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import com.example.dashboardbe.Domaine.RefreshToken;
-import com.example.dashboardbe.Domaine.USER_ROLES;
+import com.example.dashboardbe.Domaine.ROLES;
 import com.example.dashboardbe.Domaine.USER_DETAILS;
 import com.example.dashboardbe.Exception.TokenRefreshException;
 import com.example.dashboardbe.Repository.RoleRepository;
@@ -85,7 +85,7 @@ public class AuthController {
                 userDetails.getTelephoneSecondaire(),
                 userDetails.getAdresse(),
                 userDetails.getCreePar(), userDetails.getProfilUtilisateur(), userDetails.getStatutDuCompte(),
-                userDetails.getStatutDuMDP(), userDetails.getDesactivePar(),
+                userDetails.getStatutDuMDP(), userDetails.getDesactivePar(),userDetails.getDateNaissance(),
                 roles));
     }
 
@@ -110,16 +110,14 @@ public class AuthController {
         USER_DETAILS user = new USER_DETAILS(signUpRequest.getUsername(),signUpRequest.getPhoto(),  signUpRequest.getNom(),
                 signUpRequest.getPrenom(),signUpRequest.getTelephonePrincipale(), signUpRequest.getTelephoneSecondaire() ,
                 signUpRequest.getAdresse(),signUpRequest.getCreePar(),signUpRequest.getProfilUtilisateur(),
-
                 signUpRequest.getStatutDuCompte(), signUpRequest.getStatutDuMDP(), signUpRequest.getDesactivePar(),
-
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword())
+                signUpRequest.getEmail(),encoder.encode(signUpRequest.getPassword()),
+                signUpRequest.getDateNaissance()
         );
 
 
 
-        USER_ROLES roles = roleRepository.findByName("ROLE_USER").get();
+        ROLES roles = roleRepository.findByName("ROLE_USER").get();
         user.setRoles(Collections.singleton(roles));
 
         userRepository.save(user);

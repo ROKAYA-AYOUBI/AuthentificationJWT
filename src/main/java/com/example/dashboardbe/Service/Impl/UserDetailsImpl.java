@@ -44,6 +44,8 @@ public class UserDetailsImpl implements UserDetails {
     private String statutDuCompte  ;
     private String statutDuMDP;
     private String desactivePar;
+
+    private LocalDate  dateNaissance;
 /*
     private Instant dateNaissance;
     private Instant dateCreation;
@@ -63,7 +65,8 @@ public class UserDetailsImpl implements UserDetails {
     public UserDetailsImpl(Long id, String username, String email, String password, String photo,
                            String nom, String prenom, String telephonePrincipale, String telephoneSecondaire,
                            String adresse, String creePar, String profilUtilisateur, String statutDuCompte, String statutDuMDP,
-                           String desactivePar,  Collection<? extends GrantedAuthority> authorities) {
+                           String desactivePar, LocalDate  dateNaissance,
+                           Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -79,7 +82,7 @@ public class UserDetailsImpl implements UserDetails {
         this.statutDuCompte = statutDuCompte;
         this.statutDuMDP = statutDuMDP;
         this.desactivePar = desactivePar;
-
+        this.dateNaissance = dateNaissance;
         this.authorities = authorities;
     }
 
@@ -127,7 +130,7 @@ public class UserDetailsImpl implements UserDetails {
                 user.getStatutDuCompte(),
                 user.getStatutDuMDP(),
                 user.getDesactivePar(),
-
+                user.getDateNaissance(),
                 authorities);
     }
 
@@ -208,6 +211,9 @@ public class UserDetailsImpl implements UserDetails {
         return desactivePar;
     }
 
+    public LocalDate  getDateNaissance() {
+        return dateNaissance;
+    }
 
     @Override
     public boolean isAccountNonExpired() {

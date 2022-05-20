@@ -30,6 +30,7 @@ public class JwtResponse {
     private String statutDuCompte  ;
     private String statutDuMDP;
     private String desactivePar;
+    private LocalDate  dateNaissance;
 /*
     private Instant dateNaissance;
     private Instant dateCreation;
@@ -52,7 +53,7 @@ public class JwtResponse {
                 String username, String email, String photo,
                 String nom, String prenom, String telephonePrincipale, String telephoneSecondaire,
                 String adresse, String creePar, String profilUtilisateur, String statutDuCompte,
-                String statutDuMDP, String desactivePar,
+                String statutDuMDP, String desactivePar,LocalDate  dateNaissance,
                   List<String> role) {
 
             this.token = accessToken;
@@ -66,11 +67,12 @@ public class JwtResponse {
             this.telephonePrincipale = telephonePrincipale ;
             this.telephoneSecondaire = telephoneSecondaire;
             this.adresse = adresse;
-             this.creePar = creePar;
-        this.profilUtilisateur = profilUtilisateur;
-        this.statutDuCompte = statutDuCompte;
-        this.statutDuMDP = statutDuMDP;
-        this.desactivePar = desactivePar;
+            this.creePar = creePar;
+            this.profilUtilisateur = profilUtilisateur;
+            this.statutDuCompte = statutDuCompte;
+            this.statutDuMDP = statutDuMDP;
+            this.desactivePar = desactivePar;
+            this.dateNaissance = dateNaissance;
 
 
 
@@ -148,4 +150,7 @@ public class JwtResponse {
         return desactivePar;
     }
 
+    public LocalDate  getDateNaissance() {
+        return dateNaissance;
+    }
 }
